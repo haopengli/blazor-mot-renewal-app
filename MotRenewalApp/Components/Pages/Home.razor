@@ -1,0 +1,30 @@
+﻿@page "/"
+@using MotRenewalApp.Services
+@rendermode InteractiveServer
+@inject IMotService MotService
+
+<PageTitle>MOT Renewal Checker</PageTitle>
+
+<h1>MOT Renewal Checker</h1>
+
+<br/>
+
+<div>
+    <label for="registration">Enter Registration Number:</label>
+    <input type="text" @bind="registrationNumber" />
+    <button @onclick="FetchMotData">Check MOT</button>
+</div>
+
+<br/>
+
+@if (vehicle != null)
+{
+    <div>
+        <h4>Vehicle Information</h4>
+        <p><strong>Make:</strong> @vehicle.Make</p>
+        <p><strong>Model:</strong> @vehicle.Model</p>
+        <p><strong>Colour:</strong> @vehicle.PrimaryColour</p>
+        <p><strong>MOT Expiry Date:</strong> @vehicle.MotTests.FirstOrDefault()?.ExpiryDate</p>
+        <p><strong>Mileage at Last MOT:</strong> @vehicle.MotTests.FirstOrDefault()?.OdometerValue</p>
+    </div>
+}
