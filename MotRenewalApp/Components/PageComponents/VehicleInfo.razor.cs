@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MotRenewalApp.Models;
 
-namespace MotRenewalApp.Components.Pages;
+namespace MotRenewalApp.Components.PageComponents;
 
 public partial class VehicleInfo
 {
