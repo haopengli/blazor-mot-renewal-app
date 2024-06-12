@@ -1,0 +1,13 @@
+﻿@using MotRenewalApp.Models
+
+@if (Vehicle != null)
+{
+    <div class="mt-4">
+        <h4>Vehicle Information</h4>
+        <p><strong>Make:</strong> @Vehicle.Make</p>
+        <p><strong>Model:</strong> @Vehicle.Model</p>
+        <p><strong>Colour:</strong> @Vehicle.Colour</p>
+        <p><strong>MOT Expiry Date:</strong> @Vehicle.MotTests.FirstOrDefault()?.ExpiryDate.ToLongDateString()</p>
+        <p><strong>Mileage at Last MOT:</strong> @Vehicle.MotTests.FirstOrDefault()?.OdometerValue</p>
+    </div>
+}

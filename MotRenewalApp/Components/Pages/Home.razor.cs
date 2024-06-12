@@ -17,4 +17,10 @@ public partial class Home
 
         return null;
     }
+
+    private Task OnRegistrationNumberChanged(string newRegistrationNumber)
+    {
+        registrationNumber = newRegistrationNumber;
+        return Task.CompletedTask;
+    }
 }

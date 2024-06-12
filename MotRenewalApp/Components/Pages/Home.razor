@@ -9,23 +9,10 @@
     <div class="card">
         <div class="card-body">
             <h1 class="card-title text-center">MOT Renewal Checker</h1>
-            <div class="form-group">
-                <label for="registration">Enter Registration Number:</label>
-                <input type="text" id="registration" class="form-control" @bind="registrationNumber" />
-                <button class="btn btn-primary mt-2" @onclick="FetchMotData">Check MOT</button>
-            </div>
 
-            @if (vehicle != null)
-            {
-                <div class="mt-4">
-                    <h4>Vehicle Information</h4>
-                    <p><strong>Make:</strong> @vehicle.Make</p>
-                    <p><strong>Model:</strong> @vehicle.Model</p>
-                    <p><strong>Colour:</strong> @vehicle.Colour</p>
-                    <p><strong>MOT Expiry Date:</strong> @vehicle.MotTests.FirstOrDefault()?.ExpiryDate.ToLongDateString()</p>
-                    <p><strong>Mileage at Last MOT:</strong> @vehicle.MotTests.FirstOrDefault()?.OdometerValue</p>
-                </div>
-            }
+            <RegistrationForm RegistrationNumber="@registrationNumber" RegistrationNumberChanged="@OnRegistrationNumberChanged" OnCheckMotClicked="FetchMotData" />
+
+            <VehicleInfo Vehicle="vehicle"></VehicleInfo>
         </div>
     </div>
 </div>
