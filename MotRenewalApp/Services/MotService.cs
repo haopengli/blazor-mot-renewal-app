@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using MotRenewalApp.Models;
-using System.Globalization;
+using System.Net;
 
 namespace MotRenewalApp.Services
 {
@@ -33,16 +34,19 @@ namespace MotRenewalApp.Services
                 var vehicles = VehicleMapper.MapToVehicles(vehicleDtos);
                 return vehicles?.Count > 0 ? vehicles[0] : null;
             }
+            catch (HttpRequestException ex) when (ex.StatusCode == HttpStatusCode.NotFound)
+            {
+                throw new Exception("The number plate was not found. Please check the registration number and try again.");
+                return null;
+            }
             catch (HttpRequestException ex)
             {
-                // Log or handle error
-                Console.WriteLine($"Request error: {ex.Message}");
+                throw new Exception("There was a problem connecting to the MOT service. Please try again later.");
                 return null;
             }
             catch (Exception ex)
             {
-                // Log or handle error
-                Console.WriteLine($"Unexpected error: {ex.Message}");
+                throw new Exception($"Unexpected error occured: {ex.Message}");
                 return null;
             }
         }

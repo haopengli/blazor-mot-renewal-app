@@ -14,6 +14,11 @@
             <RegistrationForm RegistrationNumber="@registrationNumber" RegistrationNumberChanged="@OnRegistrationNumberChanged" OnCheckMotClicked="FetchMotData" />
 
             <VehicleInfo Vehicle="vehicle"></VehicleInfo>
+            
+            @if (!string.IsNullOrEmpty(errorMessage))
+            {
+            <ErrorComponent ErrorMessage="@errorMessage" />
+            }
         </div>
     </div>
 </div>
