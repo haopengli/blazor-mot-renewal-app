@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using MotRenewalApp.Models;
+using System.Globalization;
 
 namespace MotRenewalApp.Services
 {
@@ -25,7 +26,11 @@ namespace MotRenewalApp.Services
                 var response = await _httpClient.SendAsync(request);
                 response.EnsureSuccessStatusCode();
 
-                var vehicles = await response.Content.ReadFromJsonAsync<List<Vehicle>>();
+                var vehicleDtos = await response.Content.ReadFromJsonAsync<List<VehicleDto>>();
+
+                if (vehicleDtos == null) return null;
+                
+                var vehicles = VehicleMapper.MapToVehicles(vehicleDtos);
                 return vehicles?.Count > 0 ? vehicles[0] : null;
             }
             catch (HttpRequestException ex)

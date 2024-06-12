@@ -23,8 +23,8 @@
         <h4>Vehicle Information</h4>
         <p><strong>Make:</strong> @vehicle.Make</p>
         <p><strong>Model:</strong> @vehicle.Model</p>
-        <p><strong>Colour:</strong> @vehicle.PrimaryColour</p>
-        <p><strong>MOT Expiry Date:</strong> @vehicle.MotTests.FirstOrDefault()?.ExpiryDate</p>
+        <p><strong>Colour:</strong> @vehicle.Colour</p>
+        <p><strong>MOT Expiry Date:</strong> @vehicle.MotTests.FirstOrDefault()?.ExpiryDate.ToLongDateString()</p>
         <p><strong>Mileage at Last MOT:</strong> @vehicle.MotTests.FirstOrDefault()?.OdometerValue</p>
     </div>
 }
