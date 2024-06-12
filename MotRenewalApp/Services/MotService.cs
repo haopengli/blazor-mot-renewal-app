@@ -18,7 +18,8 @@ namespace MotRenewalApp.Services
         {
             try
             {
-                var request = new HttpRequestMessage(HttpMethod.Get, $"{_settings.Url}{registrationNumber}");
+                var requestUrl = $"{_settings.Url}{registrationNumber}";
+                var request = new HttpRequestMessage(HttpMethod.Get, requestUrl);
                 request.Headers.Add("x-api-key", _settings.ApiKey);
 
                 var response = await _httpClient.SendAsync(request);
