@@ -6,21 +6,14 @@ namespace MotRenewalApp.Models
     {
         public static Vehicle MapToVehicle(VehicleDto vehicleDto)
         {
+            MotTestDto latestMot = vehicleDto.MotTests.OrderByDescending(mot => mot.ExpiryDate).FirstOrDefault();
             return new Vehicle
             {
                 Make = vehicleDto.Make,
                 Model = vehicleDto.Model,
                 Colour = vehicleDto.PrimaryColour,
-                MotTests = vehicleDto.MotTests?.Select(MapToMotTest).ToList() ?? []
-            };
-        }
-
-        private static MotTest MapToMotTest(MotTestDto motTestDto)
-        {
-            return new MotTest
-            {
-                ExpiryDate = DateTime.ParseExact(motTestDto.ExpiryDate, "yyyy.MM.dd", CultureInfo.InvariantCulture),
-                OdometerValue = motTestDto.OdometerValue
+                ExpiryDate = DateTime.ParseExact(latestMot.ExpiryDate, "yyyy.MM.dd", CultureInfo.InvariantCulture),
+                MileageLastMot = latestMot.OdometerValue
             };
         }
 
